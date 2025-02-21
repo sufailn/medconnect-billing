@@ -1,49 +1,50 @@
+// app/api/send-email/route.js
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function POST(request) {
+export async function POST(req) {
   try {
-    const { email, selectedDateTime } = await request.json();
+    const { email, selectedDateTime } = await req.json();
 
-    // Validate input
-    if (!email || !selectedDateTime) {
+    // Validate inputs
+    if (!validateEmail(email) || !validateDate(selectedDateTime)) {
       return NextResponse.json(
-        { error: "Missing required fields" },
+        { error: "Invalid input format" },
         { status: 400 }
       );
     }
 
     // Send email
-    const { data, error } = await resend.emails.send({
+    const { error } = await resend.emails.send({
       from: 'MedConnect <onboarding@resend.dev>',
       to: process.env.YOUR_EMAIL,
-      subject: 'New Consultation Request',
+      subject: `New Consultation - ${selectedDateTime}`,
       html: `
-        <h1>New Consultation Scheduled</h1>
-        <p>Date & Time: ${new Date(selectedDateTime).toLocaleString()}</p>
-        <p>Client Email: ${email}</p>
+        <h2>New Appointment</h2>
+        <p><strong>Date:</strong> ${new Date(selectedDateTime).toLocaleString()}</p>
+        <p><strong>Client Email:</strong> ${email}</p>
       `
     });
 
-    if (error) {
-      return NextResponse.json(
-        { error: "Email sending failed" },
-        { status: 500 }
-      );
-    }
-
-    return NextResponse.json(
-      { success: true },
-      { status: 200 }
-    );
+    return error 
+      ? NextResponse.json({ error: "Email failed" }, { status: 500 })
+      : NextResponse.json({ success: true }, { status: 200 });
 
   } catch (error) {
-    console.error("API Error:", error);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: "Server error" },
       { status: 500 }
     );
   }
+}
+
+// Validation helpers
+function validateEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function validateDate(dateString) {
+  return !isNaN(Date.parse(dateString));
 }
