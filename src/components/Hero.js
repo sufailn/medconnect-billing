@@ -12,7 +12,7 @@ export default function Hero() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-
+  
     try {
       const response = await fetch('/api/send-email', {
         method: 'POST',
@@ -24,16 +24,20 @@ export default function Hero() {
           selectedDateTime
         }),
       });
-
+  
+      const result = await response.json(); // Always parse JSON
+      
       if (!response.ok) {
-        throw new Error('Request failed');
+        console.error('Server Error:', result.error);
+        throw new Error(result.error || 'Request failed');
       }
-
+  
       setSubmitStatus('success');
       setSelectedDateTime('');
       setEmail('');
+      
     } catch (error) {
-      console.error('Submission error:', error);
+      console.error('Full Error:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
