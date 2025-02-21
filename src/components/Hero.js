@@ -12,33 +12,33 @@ export default function Hero() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     try {
-      const response = await fetch('/api/schedule', {
+      const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          dateTime: selectedDateTime,
           email,
+          selectedDateTime
         }),
       });
 
-      if (response.ok) {
-        setSubmitStatus('success');
-        setSelectedDateTime('');
-        setEmail('');
-      } else {
-        setSubmitStatus('error');
+      if (!response.ok) {
+        throw new Error('Request failed');
       }
+
+      setSubmitStatus('success');
+      setSelectedDateTime('');
+      setEmail('');
     } catch (error) {
+      console.error('Submission error:', error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
     }
   };
-
   return (
     <section className="relative pt-20 pb-24 bg-gradient-to-r from-blue-50 to-cyan-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center">
@@ -84,7 +84,7 @@ export default function Hero() {
           </form>
 
           {submitStatus === 'success' && (
-            <p className="text-green-600 mt-4">Scheduled successfully! Check your email for confirmation.</p>
+            <p className="text-green-600 mt-4">Scheduled successfully! We'll confirm your appointment shortly.</p>
           )}
           {submitStatus === 'error' && (
             <p className="text-red-600 mt-4">Error scheduling appointment. Please try again.</p>
