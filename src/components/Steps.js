@@ -6,22 +6,22 @@ const steps = [
   {
     title: "Make Appointment",
     icon: CalendarIcon,
-    description: "Schedule a free consultation with our RCM experts"
+    description: "We make it easy for you to get the support you need. Whether you have questions about our services or want to discuss how we can optimize your revenue cycle, our experts are ready to assist you."
   },
   {
-    title: "Acknowledgement",
+    title: "Appointment Acknowledgement",
     icon: ChatBubbleBottomCenterTextIcon,
-    description: "Get immediate confirmation via email/SMS"
+    description: "You will receive an acknowledgment via email or phone within few minutes."
   },
   {
     title: "Formal Catch-up",
     icon: PhoneIcon,
-    description: "Detailed discussion about your practice needs"
+    description: "Book a time that works for you, and let’s connect for a meaningful conversation."
   },
   {
-    title: "Q&A Onboarding",
+    title: "Q&A ",
     icon: QuestionMarkCircleIcon,
-    description: "Finalize agreement and begin partnership"
+    description: "We will welcome any questions from your before we work together."
   }
 ];
 
@@ -35,10 +35,10 @@ export default function Steps() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            4 Simple Steps to Success
+          4 Easy Simple Phases And Get Your Solution
           </h2>
           <p className="text-xl text-gray-600">
-            Fast implementation process for seamless onboarding
+          The following four steps are faster than you might expect and designed to deliver optimal results for you.
           </p>
         </motion.div>
 
