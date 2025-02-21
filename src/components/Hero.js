@@ -1,8 +1,44 @@
 'use client';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useState } from 'react';
 
 export default function Hero() {
+  const [selectedDateTime, setSelectedDateTime] = useState('');
+  const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch('/api/schedule', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          dateTime: selectedDateTime,
+          email,
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setSelectedDateTime('');
+        setEmail('');
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section className="relative pt-20 pb-24 bg-gradient-to-r from-blue-50 to-cyan-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center">
@@ -17,9 +53,42 @@ export default function Hero() {
           <p className="text-xl text-gray-600 mb-8">
             Maximize revenue and minimize inefficiencies with our expert medical billing solutions
           </p>
-          <button className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors">
-            Schedule Free Consultation
-          </button>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <input
+                type="datetime-local"
+                required
+                value={selectedDateTime}
+                onChange={(e) => setSelectedDateTime(e.target.value)}
+                className="w-full p-2 border rounded-lg mb-4"
+              />
+            </div>
+            <div>
+              <input
+                type="email"
+                required
+                placeholder="Your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full p-2 border rounded-lg mb-4"
+              />
+            </div>
+            <button 
+              type="submit"
+              disabled={isSubmitting}
+              className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors disabled:bg-gray-400"
+            >
+              {isSubmitting ? 'Scheduling...' : 'Schedule Free Consultation'}
+            </button>
+          </form>
+
+          {submitStatus === 'success' && (
+            <p className="text-green-600 mt-4">Scheduled successfully! Check your email for confirmation.</p>
+          )}
+          {submitStatus === 'error' && (
+            <p className="text-red-600 mt-4">Error scheduling appointment. Please try again.</p>
+          )}
         </motion.div>
 
         <motion.div
