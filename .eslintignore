@@ -1,4 +1,4 @@
 # .eslintignore
-*.config.js
+*next.config.js
 .next/
 node_modules/
