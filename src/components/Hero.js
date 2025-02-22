@@ -88,7 +88,7 @@ export default function Hero() {
           </form>
 
           {submitStatus === 'success' && (
-            <p className="text-green-600 mt-4">Scheduled successfully! We'll confirm your appointment shortly.</p>
+            <p className="text-green-600 mt-4">Scheduled successfully! We &apos; ll confirm your appointment shortly.</p>
           )}
           {submitStatus === 'error' && (
             <p className="text-red-600 mt-4">Error scheduling appointment. Please try again.</p>
