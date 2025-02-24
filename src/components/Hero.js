@@ -53,7 +53,7 @@ const handleSubmit = async (e) => {
       </p>
 
       {/* Form Container */}
-      <div className="bg-white p-6 rounded-xl shadow-lg max-w-md mx-auto md:mx-0" style={{ backgroundImage: 'url(Images/date.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      <div className="bg-white p-6 rounded-xl shadow-lg max-w-md mx-auto md:mx-0 transform hover:scale-105 transition-transform duration-300" style={{ backgroundImage: 'url(Images/date.jpg)', backgroundSize: 'cover', backgroundPosition: 'center'  }}>
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="relative ">
             <label className="block text-sm  font-medium text-gray-700 mb-1">
@@ -62,6 +62,7 @@ const handleSubmit = async (e) => {
             <input
               type="datetime-local"
               required
+              placeholder="choose your date and time"
               value={selectedDateTime}
               onChange={(e) => setSelectedDateTime(e.target.value)}
               className="w-full p-3 opacity-50 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"

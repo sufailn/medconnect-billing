@@ -113,7 +113,7 @@ export default function Features() {
           short="Patient Privacy is our priority"
           title="We work according to HIPAA guidelines, ensuring compliance with its privacy and security standards to protect sensitive patient health information."
           description="We pride ourselves on fostering a best-in-class working environment that not only promotes innovation and efficiency but is also fully compliant with HIPAA standards. Our state-of-the-art facilities and rigorous security protocols ensure the protection of sensitive information, maintaining the highest level of privacy and regulatory compliance. This commitment to excellence creates a secure, dynamic space where our team can excel, and…"
-          imageSrc="/Images/Dn.jpg"
+          imageSrc="/Images/hipaa.jpeg"
           reverse={true}
         />
       </div>
