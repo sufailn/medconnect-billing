@@ -69,18 +69,7 @@ export default function Steps() {
         </div>
 
         {/* Animated CTA */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          className="text-center mt-20"
-        >
-          <p className="text-xl text-gray-600 mb-6">
-            Ready to transform your medical billing?
-          </p>
-          <button className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors">
-            Start Your Free Assessment
-          </button>
-        </motion.div>
+       
       </div>
     </section>
   );
