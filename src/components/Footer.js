@@ -1,6 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
-import { FacebookIcon, TwitterIcon, YoutubeIcon, LinkedinIcon } from '@/components/SocialIcons';
+import { LinkedinIcon, GmailIcon } from '@/components/SocialIcons';
 
 export default function Footer() {
   return (
@@ -11,14 +11,14 @@ export default function Footer() {
           whileInView={{ opacity: 1 }}
           className="grid md:grid-cols-3 gap-8 mb-12"
         >
-          {/* Company Info */}
           <div className="space-y-4">
-            <h3 className="text-2xl font-bold text-white">
-              <span className="text-blue-500">+</span>MedConnect
+            <h3 className="text-2xl font-bold text-white flex items-end relative">
+              <span className="text-blue-500 flex relative">
+                <img src="icon.png" className="h-19 w-16 mr-2 relative" />
+                <h2 className="bottom-0"> MedConnect</h2>
+              </span>
             </h3>
-            <p className="text-sm">
-              Your Financial Healthcare Partner
-            </p>
+            <p className="text-sm">Your Financial Healthcare Partner</p>
             <div className="mt-4">
               <p className="text-sm">Call us at</p>
               <a 
@@ -41,7 +41,6 @@ export default function Footer() {
                 <li><a href="#" className="hover:text-blue-400 transition-colors">Denial Prevention</a></li>
               </ul>
             </div>
-            
             <div className="space-y-3">
               <h4 className="text-white font-semibold mb-2">Company</h4>
               <ul className="space-y-2">
@@ -53,44 +52,30 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Social & Newsletter */}
-          <div className="space-y-6">
-            <div className="space-y-4">
-              <h4 className="text-white font-semibold">Follow Us</h4>
-              <div className="flex space-x-4">
-                {[
-                  { icon: FacebookIcon, href: '#' },
-                  { icon: TwitterIcon, href: '#' },
-                  { icon: YoutubeIcon, href: '#' },
-                  { icon: LinkedinIcon, href: '#' }
+       
+                <div className="space-y-6">
+                <div className="space-y-4">
+                  <h4 className="text-white font-semibold">Follow Us</h4>
+                  <div className="flex space-x-4">
+                  {[
+                    { icon: LinkedinIcon, href: 'https://www.linkedin.com/company/medconnect-billing-solutions/' },
+                    { 
+                      icon: GmailIcon, 
+                      href: 'https://mail.google.com/mail/?view=cm&fs=1&to=medconnectbilling@gmail.com&su=Hello%20MedConnect&body=Hi%20MedConnect%20Team%2C' 
+                    }, // Ensure mailto is correct
                 ].map((social, index) => (
                   <motion.a
                     key={index}
                     href={social.href}
                     whileHover={{ scale: 1.1 }}
                     className="p-2 rounded-full bg-gray-800 hover:bg-blue-600 transition-colors"
+                    target="_blank" // Open in new tab (optional)
+                    rel="noopener noreferrer" // Security best practice
                   >
                     <social.icon className="h-5 w-5" />
                   </motion.a>
                 ))}
               </div>
-            </div>
-
-            <div className="space-y-4">
-              <h4 className="text-white font-semibold">Newsletter</h4>
-              <form className="flex gap-2">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="flex-1 px-4 py-2 rounded-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                <button
-                  type="submit"
-                  className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-                >
-                  Subscribe
-                </button>
-              </form>
             </div>
           </div>
         </motion.div>
