@@ -60,9 +60,9 @@ export default function Footer() {
                   {[
                     { icon: LinkedinIcon, href: 'https://www.linkedin.com/company/medconnect-billing-solutions/' },
                     { 
-                      icon: GmailIcon, 
-                      href: 'https://mail.google.com/mail/?view=cm&fs=1&to=medconnectbilling@gmail.com&su=Hello%20MedConnect&body=Hi%20MedConnect%20Team%2C' 
-                    }, // Ensure mailto is correct
+    icon: GmailIcon, 
+    href: 'https://mail.google.com/mail/?view=cm&fs=1&to=medconnectbilling@gmail.com&su=Hello%20MedConnect&body=Hi%20MedConnect%20Team%2C' 
+  }, // Ensure mailto is correct
                 ].map((social, index) => (
                   <motion.a
                     key={index}
